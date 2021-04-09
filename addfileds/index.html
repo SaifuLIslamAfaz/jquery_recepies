@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Serialize The form</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+	<style type="text/css">
+		fieldset{width: 450px}
+		ul{padding: 2px; list-style: none}
+		label{float: left; width: 100px}
+	</style>
+</head>
+<body>
+<form>
+	<fieldset>
+		<legend>Website you visit daily</legend>
+		<ul id="sites">
+			<li>
+				<label>Name</label><input type="text" value="">
+			</li>
+			
+		</ul>
+	<input type="button" id="add" value="Add More">
+	</fieldset>
+</form>
+	
+</body>
+
+<script src="../jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('#add').click(function(){
+			var str = '<li>';
+			str +='<label>Names</label><input type="text" value="">';
+			str+='<input type="button" value="remove" class="remove">';
+			str +='</li>';
+			$('#sites').append(str);
+		});
+		$('.remove').live('click',function(){
+			$(this).parent('li').remove();
+		})
+	});
+</script>
+</html>

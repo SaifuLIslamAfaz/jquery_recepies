@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Serialize The form</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+	<style type="text/css">
+		ul{
+			border: 1px solid black; list-style: none;
+			margin:0pt;padding: 0pt;float: left;
+			font-family: verdana, arial,Helvetica,sans-serif;
+			font-size: 12px;width: 300px;
+		}
+
+		li{
+			padding: 10px 5px; border-bottom: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+	<p id="container">This Text will be replced with the new text</p>
+	<input type="button" class="loader" value="Load Script">
+	<input type="button" class="bold" value="Bold">
+	<input type="button" class="color" value="Change color">
+	<input type="button" class="change" value="Change text">
+	
+	
+</body>
+
+<script src="../jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$('input:button:first').click(function(){
+			//$.getScript('new.js',function(){
+				//alert('script loaded');
+				//addEvents();
+			//});
+		//});
+
+		$.ajax({
+			url:'new.js',
+			dataType:'script',
+			success:function(){
+				alert('script loaded');
+				addEvents();
+			}
+		});
+	});
+	});
+</script>
+</html>

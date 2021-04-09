@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Serialize The form</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+	<style type="text/css">
+		ul{
+			border: 1px solid black; list-style: none;
+			margin:0pt;padding: 0pt;float: left;
+			font-family: verdana, arial,Helvetica,sans-serif;
+			font-size: 12px;width: 300px;
+		}
+
+		li{
+			padding: 10px 5px; border-bottom: 1px solid black;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<ul id="information">
+		
+		<li>
+			<label>Email: </label>
+			<input type="text" name="email">
+		</li>
+
+		<li>
+			<label>Full Nmae: </label>
+			<input type="text" name="fullName">
+		</li>
+
+		<li>
+			<label>Sex: </label>
+			<input type="radio" name="sex" value="Male">Male
+			<input type="radio" name="sex" value="Female">Female
+		</li>
+		<li>
+			<label>Sex: </label>
+			<select name="country">
+				<option value="Bangladesh">Bangladesh</option>
+				<option value="Oman">Oman</option>
+				<option value="Uk">Uk</option>
+			</select>
+		</li>
+
+		<li>
+			<label>Newsletter: </label>
+			<input type="checkbox" name="letter">Send Me More Information
+		</li>
+
+		<li>
+			<input type="button" value="GO">
+		</li>
+
+	</ul>
+	<p id="response"></p>
+</form>
+
+</body>
+
+<script src="../jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('input:button').click(function(){
+			/*$var data = $('form:first').serialize();
+			$.post(
+				'process.php',
+				data,
+				function(data){
+					console.log(data);
+					$("#information").hide();
+					$("#response").html(data).show();
+				}				);
+		});*/
+
+		$.ajax(
+		{
+			url:'process.php',
+			method:'post',
+			data:$('form:first').serialize(),
+			dataType:'html',
+			success:function(response){
+				$("#information").hide();
+				$("#response").html(response);
+			}
+		});
+	});
+	});
+</script>
+</html>

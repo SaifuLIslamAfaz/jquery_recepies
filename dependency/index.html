@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Serialize The form</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="">
+	<style type="text/css">
+		ul{
+			list-style: none;
+			margin:0pt;
+			padding: 0pt;
+			float: left;
+			font-family: verdana, arial,Helvetica,sans-serif;
+			font-size: 12px;
+			width: 525px;
+		}
+
+		li{
+			float: left;padding: 10px;
+		}
+		p{
+			border:1px solid #000; float:left; height: 100px; width: 500px;
+		}
+		select{
+			width: 100px;
+		}
+	</style>
+</head>
+<body>
+
+<form>
+	<ul>
+		<li>
+			<strong>Country</strong>
+			<select id="countryList">
+				<option value="">Select</option>
+			</select>
+		</li>
+		<li>
+			<strong>State</strong>
+			<select id="stateList">
+				<option value="">Select</option>
+			</select>
+		</li>
+
+		<li>
+			<strong>Town</strong>
+			<select id="townList">
+				<option value="">Select</option>
+			</select>
+		</li>
+	</ul>
+	<p id="information"></p>
+</form>
+
+</body>
+
+<script src="../jquery.js"></script>
+<script type="text/javascript">
+	$(document).ready(function()
+	{
+	  $('select').change(getList);
+	  getList();
+	  function getList()
+	  {
+	  	var url, target;
+	  	var id = $(this).attr('id');
+	  	var selectedValue = $(this).val();
+
+	  	switch(id)
+	  	{
+	  		case 'countryList':
+	  		if(selectedValue == '') return;
+	  		url = 'results.php?find=states&id='+selectedValue;
+	  		target = 'stateList';
+	  		break;
+
+	  		case 'stateList':
+	  		if($(this).val()=='') return;
+	  		url = 'results.php?find=towns&id='+selectedValue;
+	  		target = 'townList';
+	  		break;
+
+	  		case 'townList':
+	  		if($(this).val()=='') return;
+	  		url = 'results.php?find=information&id='+selectedValue;
+	  		target = 'information';
+	  		break;
+
+	  		default:
+	  		url= 'results.php?find=country';
+	  		target = 'countryList';
+	  	}
+
+	  	$.get(
+	  		url,
+	  		{},
+	  		function (data) {
+	  			$('#'+target).html(data);
+	  		}
+	  	  )
+	  	}
+	});
+</script>
+</html>
